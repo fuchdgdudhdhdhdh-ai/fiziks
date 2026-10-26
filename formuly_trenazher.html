@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Формулы по физике — тренажёр</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<style>
+:root{--bg:#f4f5f9;--card:#fff;--tx:#1b1f2a;--mut:#69708a;--ac:#4f46e5;--acs:#e8e7fd;--ok:#16a34a;--oks:#dcfce7;--bad:#dc2626;--bads:#fee2e2;--warn:#d97706;--bd:#dfe2ec}
+@media(prefers-color-scheme:dark){:root{--bg:#12141c;--card:#1b1f2c;--tx:#e8eaf3;--mut:#9aa1ba;--ac:#818cf8;--acs:#272a47;--ok:#4ade80;--oks:#14341f;--bad:#f87171;--bads:#3b1a1a;--warn:#fbbf24;--bd:#2c3144}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:14px}
+h1{font-size:20px;margin:6px 0 10px}
+.top{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:12px}
+.bar{height:14px;background:var(--acs);border-radius:99px;overflow:hidden;margin:8px 0 4px}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--ac),var(--ok));width:0;transition:width .4s}
+.small{color:var(--mut);font-size:13px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+.tab{flex:1;min-width:110px;padding:11px 8px;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;font-size:15px;font-weight:600;cursor:pointer}
+.tab.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{padding:5px 10px;border-radius:99px;border:1px solid var(--bd);background:var(--bg);color:var(--mut);font-size:13px;cursor:pointer;user-select:none}
+.chip.on{background:var(--acs);color:var(--ac);border-color:var(--ac);font-weight:600}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:20px;margin-bottom:12px}
+.name{font-size:19px;font-weight:600;margin-bottom:6px}
+.grp{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+.formula{font-size:1.45em;padding:14px 6px;overflow-x:auto;text-align:center;min-height:70px;display:flex;align-items:center;justify-content:center}
+.formula.hid{filter:blur(12px);cursor:pointer;user-select:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.btn{padding:12px 18px;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;flex:1}
+.btn.pri{background:var(--ac);color:#fff;border-color:var(--ac)}
+.btn.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.btn.no{background:var(--bad);color:#fff;border-color:var(--bad)}
+.btn:disabled{opacity:.5}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+@media(max-width:600px){.opts{grid-template-columns:1fr}}
+.opt{border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:12px;padding:12px;font-size:16px;cursor:pointer;min-height:76px;display:flex;align-items:center;justify-content:center;text-align:center;gap:8px}
+.opt:hover{border-color:var(--ac)}
+.opt .k{color:var(--mut);font-size:12px;font-weight:700}
+.opt.right{border-color:var(--ok);background:var(--oks)}
+.opt.wrong{border-color:var(--bad);background:var(--bads)}
+.opt.dis{pointer-events:none}
+.fb{margin-top:14px;padding:12px;border-radius:12px}
+.fb.ok{background:var(--oks);color:var(--ok)}
+.fb.bad{background:var(--bads);color:var(--bad)}
+.fb b{display:block;margin-bottom:4px}
+.prog{display:flex;justify-content:space-between;color:var(--mut);font-size:13px;margin-bottom:8px}
+.stat{display:inline-block;padding:3px 9px;border-radius:99px;font-size:12px;font-weight:700}
+.s0{background:var(--bg);color:var(--mut)}.s1{background:#fef3c7;color:var(--warn)}.s2{background:var(--oks);color:var(--ok)}
+table{width:100%;border-collapse:collapse}
+td{padding:10px 6px;border-bottom:1px solid var(--bd);vertical-align:middle}
+td.f{text-align:right;overflow-x:auto;max-width:360px}
+.big{font-size:44px;text-align:center}
+.center{text-align:center}
+a.lnk{color:var(--ac);cursor:pointer}
+.opts.o3{grid-template-columns:1fr}.opt{font-size:18px}.opt .katex{font-size:1.2em}.opts.o3 .opt{min-height:64px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>⚡ Формулы по физике 7–11 класс — тренажёр</h1>
+  <div class="top">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><b id="pt">Освоено: 0 из 0</b><span class="small" id="pp">0%</span></div>
+    <div class="bar"><i id="pb"></i></div>
+    <div class="small">Формула (или обозначение) считается освоенной, когда ты дважды подряд ответил правильно. Ошибка обнуляет серию, и она вернётся в очередь.</div>
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  <div id="app"></div>
+  <p class="small center">Прогресс сохраняется в браузере. <a class="lnk" id="reset">Сбросить весь прогресс</a></p>
+</div>
+<script>
+const r = String.raw;
+const SEP = r`\;;\quad `;
+const F = [];
+const add = (g, name, tex) => F.push({ g, name, tex });
+
+// ===== 7 КЛАСС =====
+add("7 класс", "Скорость при прямолинейном равномерном движении", r`v=\dfrac{S}{t}`);
+add("7 класс", "Плотность тела", r`\rho=\dfrac{m}{V}`);
+add("7 класс", "Сила тяжести", r`F_{т}=mg`);
+add("7 класс", "Сила упругости (закон Гука)", r`F_{упр}=k\cdot\Delta l`);
+add("7 класс", "Удлинение тела", r`\Delta l=l-l_0`);
+add("7 класс", "Вес тела (покой / ускорение вниз / вверх)", r`P=mg${SEP}P=m(g-a)${SEP}P=m(g+a)`);
+add("7 класс", "Давление твёрдого тела", r`p=\dfrac{F}{S}`);
+add("7 класс", "Гидростатическое давление", r`p=\rho g h`);
+add("7 класс", "Сообщающиеся сосуды с неоднородной жидкостью", r`\dfrac{\rho_1}{\rho_2}=\dfrac{h_2}{h_1}`);
+add("7 класс", "Гидравлический пресс", r`\dfrac{F_1}{F_2}=\dfrac{S_1}{S_2}`);
+add("7 класс", "Архимедова сила (3 формулы)", r`F_A=P_{в\,возд}-P_{в\,жидк}${SEP}F_A=V_{т}\rho_{ж}g${SEP}F_A=P_{ж}`);
+add("7 класс", "Условие равновесия рычага", r`\dfrac{F_1}{F_2}=\dfrac{l_2}{l_1}`);
+add("7 класс", "Правило моментов", r`M_1=M_2${SEP}F_1l_1=F_2l_2`);
+add("7 класс", "Момент силы", r`M=F\cdot l`);
+add("7 класс", "КПД механизма", r`\eta=\dfrac{A_п}{A_з}\cdot100\%`);
+add("7 класс", "Кинетическая энергия тела (2 формулы)", r`E_k=\dfrac{mv^2}{2}${SEP}E_k=\dfrac{p^2}{2m}`);
+add("7 класс", "Потенциальная энергия тела", r`E_p=mgh`);
+
+// ===== 8 КЛАСС =====
+add("8 класс", "Количество теплоты при нагревании и охлаждении", r`Q=cm(t_2-t_1)`);
+add("8 класс", "Энергия топлива (сгорание)", r`Q=q\cdot m`);
+add("8 класс", "Плавление и отвердевание", r`Q=\lambda\cdot m`);
+add("8 класс", "Парообразование и конденсация", r`Q=L\cdot m`);
+add("8 класс", "Сила тока", r`I=\dfrac{q}{t}`);
+add("8 класс", "Напряжение", r`U=\dfrac{A}{q}`);
+add("8 класс", "Сопротивление проводника", r`R=\dfrac{\rho l}{S}`);
+add("8 класс", "Закон Ома для участка цепи", r`I=\dfrac{U}{R}`);
+add("8 класс", "Последовательное соединение проводников", r`I=I_1=I_2${SEP}U=U_1+U_2${SEP}R=R_1+R_2`);
+add("8 класс", "Параллельное соединение проводников", r`I=I_1+I_2${SEP}U=U_1=U_2${SEP}R=\dfrac{R_1R_2}{R_1+R_2}`);
+add("8 класс", "Работа тока (3 формулы)", r`A=I^2Rt${SEP}A=UIt${SEP}A=Pt${SEP}A=\dfrac{U^2}{R}t`);
+add("8 класс", "Мощность тока (3 формулы)", r`P=I^2R${SEP}P=\dfrac{A}{t}${SEP}P=UI${SEP}P=\dfrac{U^2}{R}`);
+add("8 класс", "Закон Джоуля — Ленца", r`Q=I^2Rt`);
+add("8 класс", "Закон отражения света", r`\alpha=\beta`);
+add("8 класс", "Закон преломления света", r`n=\dfrac{\sin\alpha}{\sin\gamma}`);
+add("8 класс", "Оптическая сила линзы", r`D=\dfrac{1}{F}`);
+
+// ===== 9 КЛАСС =====
+add("9 класс", "Ускорение", r`a_x=\dfrac{v_x-v_{0x}}{t}`);
+add("9 класс", "Скорость при равноускоренном движении", r`v_x=v_{0x}+a_xt`);
+add("9 класс", "Перемещение при равноускоренном движении (2 формулы)", r`S_x=v_{0x}t+\dfrac{a_xt^2}{2}${SEP}S_x=\dfrac{v_x^2-v_{0x}^2}{2a_x}`);
+add("9 класс", "Второй закон Ньютона", r`F=ma`);
+add("9 класс", "Третий закон Ньютона", r`F_1=-F_2`);
+add("9 класс", "Закон всемирного тяготения", r`F=G\dfrac{m_1m_2}{R^2}`);
+add("9 класс", "Ускорение свободного падения на Земле и других телах", r`g=\dfrac{GM_п}{R_п^2}`);
+add("9 класс", "Центростремительное ускорение", r`a_{цс}=\dfrac{v^2}{R}${SEP}a_{цс}=\omega^2R`);
+add("9 класс", "Первая космическая скорость", r`v=\sqrt{\dfrac{GM}{R+h}}${SEP}v=\sqrt{gR}`);
+add("9 класс", "Импульс тела", r`p=mv`);
+add("9 класс", "Закон сохранения импульса", r`m_1\vec v_1+m_2\vec v_2=m_1\vec v_1'+m_2\vec v_2'`);
+add("9 класс", "Период колебания", r`T=\dfrac{t}{N}`);
+add("9 класс", "Частота колебания", r`\nu=\dfrac{N}{t}`);
+add("9 класс", "Связь между периодом и частотой", r`\nu=\dfrac{1}{T}${SEP}T=\dfrac{1}{\nu}`);
+add("9 класс", "Длина волны (2 формулы)", r`\lambda=v\cdot T${SEP}\lambda=\dfrac{v}{\nu}`);
+
+// ===== 10 КЛАСС: механика =====
+add("10 класс · Механика", "Путь, скорость, время при равномерном движении", r`S_x=v_xt${SEP}v_x=\dfrac{S_x}{t}${SEP}t=\dfrac{S_x}{v_x}`);
+add("10 класс · Механика", "Координата при равномерном движении", r`x=x_0+v_xt`);
+add("10 класс · Механика", "Координата при равноускоренном движении", r`x=x_0+v_{0x}t+\dfrac{a_xt^2}{2}`);
+add("10 класс · Механика", "Перемещение при равноускоренном движении (3 формулы)", r`S_x=v_{0x}t+\dfrac{a_xt^2}{2}${SEP}S_x=\dfrac{v_x+v_{0x}}{2}\,t${SEP}S_x=\dfrac{v_x^2-v_{0x}^2}{2a_x}`);
+add("10 класс · Механика", "Перемещение за n-ную секунду", r`S_n=\dfrac{a_x}{2}(2n-1)`);
+add("10 класс · Механика", "Дальность и высота при броске горизонтально", r`L=v_0t${SEP}h=\dfrac{g_yt^2}{2}`);
+add("10 класс · Механика", "Время полёта при броске горизонтально", r`t=\dfrac{L}{v_0}${SEP}t=\sqrt{\dfrac{2h}{g_y}}`);
+add("10 класс · Механика", "Проекции начальной скорости при броске под углом", r`v_x=v_0\cos\alpha${SEP}v_y=v_0\sin\alpha`);
+add("10 класс · Механика", "Время полёта и максимальная высота (бросок под углом)", r`t=\dfrac{2v_0\sin\alpha}{g_y}${SEP}h=\dfrac{v_0^2\sin^2\alpha}{2g_y}`);
+add("10 класс · Механика", "Дальность полёта (бросок под углом)", r`L=\dfrac{v_0^2\sin2\alpha}{g_y}`);
+add("10 класс · Механика", "Угловая скорость (3 формулы)", r`\omega=\dfrac{\Delta\varphi}{\Delta t}${SEP}\omega=\dfrac{2\pi}{T}${SEP}\omega=2\pi\nu`);
+add("10 класс · Механика", "Связь линейной и угловой скоростей", r`v=\omega R`);
+add("10 класс · Механика", "Линейная скорость при движении по окружности", r`v=\omega R${SEP}v=\dfrac{2\pi R}{T}`);
+add("10 класс · Механика", "Центростремительная сила", r`F_ц=\dfrac{mv^2}{R}`);
+add("10 класс · Механика", "Сила трения", r`F_{тр}=\mu N`);
+add("10 класс · Механика", "Работа силы", r`A=F\cdot S\cdot\cos\alpha`);
+add("10 класс · Механика", "Работа через мощность", r`A=N\cdot t`);
+add("10 класс · Механика", "Мощность (2 формулы)", r`N=\dfrac{A}{t}${SEP}N=F\cdot v`);
+add("10 класс · Механика", "Теорема о кинетической энергии", r`A=\Delta E_k`);
+add("10 класс · Механика", "Теорема о потенциальной энергии", r`A=-\Delta E_p`);
+add("10 класс · Механика", "Потенциальная энергия упруго деформированного тела", r`E_p=\dfrac{kx^2}{2}`);
+add("10 класс · Механика", "Закон сохранения энергии в механике", r`mgh_1+\dfrac{mv_1^2}{2}=mgh_2+\dfrac{mv_2^2}{2}`);
+add("10 класс · Механика", "Изменение импульса (импульс силы)", r`F\cdot t=\Delta p`);
+add("10 класс · Механика", "КПД", r`\eta=\dfrac{A_{полез}}{A_{затр}}\cdot100\%`);
+
+// ===== 10 КЛАСС: МКТ и термодинамика =====
+add("10 класс · МКТ", "Количество вещества (2 формулы)", r`\nu=\dfrac{m}{M}${SEP}\nu=\dfrac{N}{N_A}`);
+add("10 класс · МКТ", "Молярная масса", r`M=m_0\cdot N_A${SEP}M=\dfrac{m}{\nu}`);
+add("10 класс · МКТ", "Число молекул", r`N=\dfrac{m}{M}N_A`);
+add("10 класс · МКТ", "Концентрация молекул", r`n=\dfrac{N}{V}`);
+add("10 класс · МКТ", "Основное уравнение МКТ", r`p=\dfrac{1}{3}m_0n\overline{v^2}${SEP}p=\dfrac{1}{3}\rho\overline{v^2}`);
+add("10 класс · МКТ", "Связь давления со средней кинетической энергией молекул", r`p=\dfrac{2}{3}n\overline{E}`);
+add("10 класс · МКТ", "Связь средней кинетической энергии с температурой", r`\overline{E}=\dfrac{3}{2}kT`);
+add("10 класс · МКТ", "Зависимость давления от температуры", r`p=nkT`);
+add("10 класс · МКТ", "Средняя квадратичная скорость молекул", r`\overline{v}=\sqrt{\dfrac{3kT}{m_0}}${SEP}\overline{v}=\sqrt{\dfrac{3RT}{M}}`);
+add("10 класс · МКТ", "Уравнение состояния идеального газа (Менделеева — Клапейрона)", r`pV=\dfrac{m}{M}RT`);
+add("10 класс · МКТ", "Уравнение Клапейрона", r`\dfrac{p_1V_1}{T_1}=\dfrac{p_2V_2}{T_2}`);
+add("10 класс · МКТ", "Закон Бойля — Мариотта", r`p_1V_1=p_2V_2\quad(T=const)`);
+add("10 класс · МКТ", "Закон Гей-Люссака", r`\dfrac{V_1}{T_1}=\dfrac{V_2}{T_2}\quad(p=const)`);
+add("10 класс · МКТ", "Закон Шарля", r`\dfrac{p_1}{T_1}=\dfrac{p_2}{T_2}\quad(V=const)`);
+add("10 класс · МКТ", "Закон Дальтона", r`p=p_1+p_2+\dots+p_n`);
+add("10 класс · МКТ", "Относительная влажность воздуха", r`\varphi=\dfrac{p}{p_н}\cdot100\%${SEP}\varphi=\dfrac{\rho}{\rho_н}\cdot100\%`);
+add("10 класс · Термодинамика", "Внутренняя энергия идеального одноатомного газа", r`U=\dfrac{3}{2}\dfrac{m}{M}RT${SEP}U=\dfrac{3}{2}pV`);
+add("10 класс · Термодинамика", "Работа газа и работа над газом", r`A'=p\Delta V${SEP}A=-p\Delta V`);
+add("10 класс · Термодинамика", "Первый закон термодинамики (2 формулы)", r`\Delta U=A+Q${SEP}Q=A'+\Delta U`);
+add("10 класс · Термодинамика", "Первый закон: изотермический процесс", r`T=const,\ \Delta U=0${SEP}Q=A'`);
+add("10 класс · Термодинамика", "Первый закон: изобарный процесс", r`p=const${SEP}\Delta U=A+Q`);
+add("10 класс · Термодинамика", "Первый закон: изохорный процесс", r`V=const,\ A=A'=0${SEP}\Delta U=Q`);
+add("10 класс · Термодинамика", "Первый закон: адиабатный процесс", r`Q=0${SEP}\Delta U=A`);
+add("10 класс · Термодинамика", "КПД теплового двигателя (3 формулы)", r`\eta=\dfrac{A'}{Q_н}${SEP}\eta=\dfrac{Q_н-Q_х}{Q_н}${SEP}\eta=\dfrac{T_н-T_х}{T_н}`);
+
+// ===== 10 КЛАСС: электродинамика =====
+add("10 класс · Электростатика", "Закон сохранения электрического заряда", r`q_1+q_2+\dots+q_n=const`);
+add("10 класс · Электростатика", "Закон Кулона", r`F=\dfrac{k|q_1||q_2|}{r^2}`);
+add("10 класс · Электростатика", "Напряжённость поля", r`E=\dfrac{F}{q}`);
+add("10 класс · Электростатика", "Напряжённость поля точечного заряда", r`E=\dfrac{k|q_0|}{r^2}`);
+add("10 класс · Электростатика", "Потенциальная энергия заряда в однородном поле", r`W_p=qEd`);
+add("10 класс · Электростатика", "Потенциал электростатического поля", r`\varphi=\dfrac{W_p}{q}${SEP}\varphi=Ed`);
+add("10 класс · Электростатика", "Разность потенциалов (напряжение)", r`U=\varphi_1-\varphi_2${SEP}U=\dfrac{A}{q}`);
+add("10 класс · Электростатика", "Связь напряжения и напряжённости", r`E=\dfrac{U}{d}${SEP}U=Ed`);
+add("10 класс · Электростатика", "Электроёмкость (3 формулы)", r`C=\dfrac{q}{U}${SEP}C=\dfrac{\varepsilon\varepsilon_0S}{d}`);
+add("10 класс · Электростатика", "Энергия конденсатора (3 формулы)", r`W=\dfrac{qU}{2}${SEP}W=\dfrac{q^2}{2C}${SEP}W=\dfrac{CU^2}{2}`);
+add("10 класс · Электростатика", "Параллельное соединение конденсаторов", r`q=q_1+q_2+\dots${SEP}U=U_1=U_2=\dots${SEP}C=C_1+C_2+\dots`);
+add("10 класс · Электростатика", "Последовательное соединение конденсаторов", r`U=U_1+U_2+\dots${SEP}q=q_1=q_2=\dots${SEP}\dfrac{1}{C}=\dfrac{1}{C_1}+\dfrac{1}{C_2}+\dots`);
+add("10 класс · Постоянный ток", "Закон Ома для полной цепи", r`I=\dfrac{\mathcal{E}}{R+r}`);
+add("10 класс · Постоянный ток", "Закон Фарадея (электролиз)", r`m=kIt`);
+
+// ===== 11 КЛАСС =====
+add("11 класс · Магнетизм", "Сила Ампера", r`F_A=BIl\sin\alpha`);
+add("11 класс · Магнетизм", "Магнитная индукция", r`B=\dfrac{F_m}{Il\sin\alpha}`);
+add("11 класс · Магнетизм", "Сила Лоренца", r`F_л=Bvq\sin\alpha`);
+add("11 класс · Магнетизм", "Магнитный поток (3 формулы)", r`\Phi=LI${SEP}\Phi=BS\cos\alpha${SEP}\Phi=B_nS`);
+add("11 класс · Магнетизм", "Закон электромагнитной индукции", r`\mathcal{E}_i=\left|\dfrac{\Delta\Phi}{\Delta t}\right|`);
+add("11 класс · Магнетизм", "ЭДС индукции в движущихся проводниках", r`\mathcal{E}_i=Bvl\sin\alpha`);
+add("11 класс · Магнетизм", "ЭДС самоиндукции", r`\mathcal{E}_{is}=-L\dfrac{\Delta I}{\Delta t}`);
+add("11 класс · Магнетизм", "Энергия магнитного поля", r`W_м=\dfrac{LI^2}{2}`);
+add("11 класс · Колебания и волны", "Период колебаний математического маятника", r`T=2\pi\sqrt{\dfrac{l}{g}}`);
+add("11 класс · Колебания и волны", "Период колебаний пружинного маятника", r`T=2\pi\sqrt{\dfrac{m}{k}}`);
+add("11 класс · Колебания и волны", "Уравнение колебательного движения", r`x=x_m\cos\omega t`);
+add("11 класс · Колебания и волны", "Формула Томсона", r`T=2\pi\sqrt{LC}`);
+add("11 класс · Колебания и волны", "Формула для трансформатора", r`\dfrac{U_1}{U_2}=\dfrac{N_1}{N_2}=k`);
+add("11 класс · Колебания и волны", "Закон сохранения энергии для механических колебаний", r`\dfrac{mv^2}{2}+\dfrac{kx^2}{2}=\dfrac{mv_{max}^2}{2}=\dfrac{kx_{max}^2}{2}=const`);
+add("11 класс · Колебания и волны", "Связь амплитуды колебаний с амплитудой скорости", r`v_{max}=\omega\cdot x_{max}`);
+add("11 класс · Колебания и волны", "Связь амплитуды колебаний с амплитудой ускорения", r`a_{max}=\omega^2\cdot x_{max}`);
+add("11 класс · Колебания и волны", "Уравнение свободных электромагнитных колебаний", r`q=q_{max}\cos\omega t`);
+add("11 класс · Колебания и волны", "Связь амплитуды заряда с амплитудой силы тока", r`q_{max}=\dfrac{I_{max}}{\omega}`);
+add("11 класс · Колебания и волны", "Закон сохранения энергии в идеальном колебательном контуре", r`\dfrac{CU^2}{2}+\dfrac{LI^2}{2}=\dfrac{CU_{max}^2}{2}=\dfrac{LI_{max}^2}{2}=const`);
+add("11 класс · Оптика", "Формула тонкой линзы", r`\dfrac{1}{F}=\dfrac{1}{f}+\dfrac{1}{d}`);
+add("11 класс · Оптика", "Увеличение линзы", r`\Gamma=\dfrac{H}{h}${SEP}\Gamma=\dfrac{|f|}{|d|}`);
+add("11 класс · Оптика", "Условия максимума и минимума интерференции", r`\Delta d=k\lambda\ (max)${SEP}\Delta d=(2k+1)\dfrac{\lambda}{2}\ (min)`);
+add("11 класс · Оптика", "Максимум дифракции", r`d\sin\varphi=k\lambda`);
+add("11 класс · Оптика", "Абсолютный показатель преломления", r`n_{абс}=\dfrac{c}{v}`);
+add("11 класс · Оптика", "Относительный показатель преломления", r`n_{отн}=\dfrac{n_2}{n_1}=\dfrac{v_1}{v_2}`);
+add("11 класс · Оптика", "Соотношения при переходе света через границу двух сред", r`\nu_1=\nu_2${SEP}n_1\lambda_1=n_2\lambda_2`);
+add("11 класс · Оптика", "Предельный угол полного отражения", r`\sin\alpha_{пр}=\dfrac{1}{n_{отн}}`);
+add("11 класс · Квантовая и ядерная физика", "Формула Эйнштейна (связь массы и энергии)", r`E=mc^2`);
+add("11 класс · Квантовая и ядерная физика", "Формула Эйнштейна для фотоэффекта", r`h\nu=A_{вых}+\dfrac{mv^2}{2}${SEP}h\nu=A_{вых}+eU_з`);
+add("11 класс · Квантовая и ядерная физика", "Энергия фотона", r`E=h\nu`);
+add("11 класс · Квантовая и ядерная физика", "Масса фотона", r`m=\dfrac{h\nu}{c^2}`);
+add("11 класс · Квантовая и ядерная физика", "Импульс фотона (3 формулы)", r`p=mc${SEP}p=\dfrac{h\nu}{c}${SEP}p=\dfrac{h}{\lambda}`);
+add("11 класс · Квантовая и ядерная физика", "Закон радиоактивного распада", r`N=N_0\cdot2^{-\frac{t}{T}}`);
+add("11 класс · Квантовая и ядерная физика", "Правило смещения при альфа-распаде", r`{}^{A}_{Z}X\to{}^{A-4}_{Z-2}Y+{}^{4}_{2}He`);
+add("11 класс · Квантовая и ядерная физика", "Правило смещения при бета-распаде", r`{}^{A}_{Z}X\to{}^{A}_{Z+1}Y+{}^{\ 0}_{-1}e`);
+add("11 класс · Квантовая и ядерная физика", "Дефект масс", r`\Delta m=(Zm_p+Nm_n)-M_я`);
+
+// ===== ОБОЗНАЧЕНИЯ: величина → буква (правильная, плюс похожие неверные) =====
+const SYM = [];
+const sy = (name, tex, d) => SYM.push({ name, tex, d, sym: true });
+// Механика
+sy("Путь, перемещение", r`S`, [r`s`, r`l`, r`x`, r`h`, r`r`]);
+sy("Время", r`t`, [r`T`, r`\tau`, r`n`, r`\nu`]);
+sy("Скорость", r`v`, [r`V`, r`u`, r`c`, r`\nu`, r`\omega`]);
+sy("Ускорение", r`a`, [r`g`, r`A`, r`\alpha`, r`w`]);
+sy("Масса", r`m`, [r`M`, r`\mu`, r`n`, r`\rho`]);
+sy("Плотность", r`\rho`, [r`p`, r`q`, r`\nu`, r`\mu`, r`\sigma`]);
+sy("Объём", r`V`, [r`v`, r`W`, r`\nu`, r`S`]);
+sy("Сила", r`F`, [r`f`, r`P`, r`E`, r`N`]);
+sy("Давление", r`p`, [r`P`, r`\rho`, r`F`, r`q`]);
+sy("Сила тяжести", r`F_{т}`, [r`P`, r`N`, r`F_{упр}`, r`F_{тр}`]);
+sy("Сила упругости", r`F_{упр}`, [r`F_{т}`, r`k`, r`N`, r`F_{тр}`]);
+sy("Сила трения", r`F_{тр}`, [r`F_{т}`, r`\mu`, r`N`, r`F_{упр}`]);
+sy("Коэффициент жёсткости пружины", r`k`, [r`K`, r`\mu`, r`\lambda`, r`c`]);
+sy("Коэффициент трения", r`\mu`, [r`m`, r`k`, r`\rho`, r`\eta`]);
+sy("Вес тела", r`P`, [r`p`, r`W`, r`m`, r`F`]);
+sy("Ускорение свободного падения", r`g`, [r`a`, r`G`, r`\gamma`, r`h`]);
+sy("Гравитационная постоянная", r`G`, [r`g`, r`g_0`, r`k`, r`R`]);
+sy("Работа", r`A`, [r`W`, r`E`, r`F`, r`Q`]);
+sy("Мощность (механическая)", r`N`, [r`P`, r`A`, r`W`, r`p`]);
+sy("КПД", r`\eta`, [r`\mu`, r`k`, r`\gamma`, r`\varphi`]);
+sy("Кинетическая энергия", r`E_k`, [r`E_p`, r`K`, r`W`, r`T`]);
+sy("Потенциальная энергия", r`E_p`, [r`E_k`, r`U`, r`W`, r`P`]);
+sy("Импульс тела", r`p`, [r`P`, r`m`, r`F`, r`I`]);
+sy("Период колебаний", r`T`, [r`t`, r`N`, r`\nu`, r`\tau`]);
+sy("Частота колебаний", r`\nu`, [r`v`, r`T`, r`\omega`, r`f`]);
+sy("Угловая (циклическая) скорость", r`\omega`, [r`w`, r`\nu`, r`v`, r`\varphi`]);
+sy("Длина волны", r`\lambda`, [r`l`, r`\nu`, r`L`, r`\omega`]);
+sy("Центростремительное ускорение", r`a_{цс}`, [r`a`, r`g`, r`\omega`, r`F_ц`]);
+sy("Радиус", r`R`, [r`r`, r`d`, r`l`, r`h`]);
+sy("Высота", r`h`, [r`H`, r`l`, r`d`, r`n`]);
+sy("Момент силы", r`M`, [r`m`, r`F`, r`\mu`, r`L`]);
+sy("Плечо силы", r`l`, [r`L`, r`d`, r`S`, r`h`]);
+// МКТ и термодинамика
+sy("Количество вещества", r`\nu`, [r`n`, r`N`, r`M`, r`m`]);
+sy("Молярная масса", r`M`, [r`m`, r`\mu`, r`N_A`, r`m_0`]);
+sy("Постоянная Авогадро", r`N_A`, [r`N`, r`A`, r`k`, r`R`]);
+sy("Число молекул", r`N`, [r`n`, r`\nu`, r`M`, r`N_A`]);
+sy("Концентрация молекул", r`n`, [r`N`, r`\nu`, r`\rho`, r`m_0`]);
+sy("Масса одной молекулы", r`m_0`, [r`m`, r`M`, r`\mu`, r`\rho_0`]);
+sy("Постоянная Больцмана", r`k`, [r`K`, r`R`, r`G`, r`h`]);
+sy("Универсальная газовая постоянная", r`R`, [r`r`, r`k`, r`G`, r`N_A`]);
+sy("Абсолютная температура", r`T`, [r`t`, r`\theta`, r`Q`, r`\tau`]);
+sy("Относительная влажность", r`\varphi`, [r`\eta`, r`\rho`, r`\omega`, r`\psi`]);
+sy("Внутренняя энергия", r`U`, [r`W`, r`E`, r`Q`, r`A`]);
+sy("Количество теплоты", r`Q`, [r`q`, r`A`, r`U`, r`C`]);
+sy("Удельная теплоёмкость", r`c`, [r`C`, r`q`, r`\lambda`, r`L`]);
+sy("Удельная теплота сгорания топлива", r`q`, [r`Q`, r`c`, r`\lambda`, r`L`]);
+sy("Удельная теплота плавления", r`\lambda`, [r`L`, r`q`, r`r`, r`c`]);
+sy("Удельная теплота парообразования", r`L`, [r`\lambda`, r`q`, r`r`, r`c`]);
+sy("Работа газа", r`A'`, [r`A`, r`W`, r`Q`, r`\Delta U`]);
+sy("Изменение внутренней энергии", r`\Delta U`, [r`\Delta Q`, r`U`, r`\Delta A`, r`\Delta T`]);
+// Электричество
+sy("Сила тока", r`I`, [r`i`, r`A`, r`q`, r`U`, r`J`]);
+sy("Электрический заряд", r`q`, [r`Q`, r`e`, r`I`, r`C`]);
+sy("Напряжение", r`U`, [r`u`, r`V`, r`I`, r`\varphi`]);
+sy("Электрическое сопротивление", r`R`, [r`r`, r`\rho`, r`P`, r`C`]);
+sy("Удельное сопротивление проводника", r`\rho`, [r`R`, r`\sigma`, r`\lambda`, r`p`]);
+sy("ЭДС источника", r`\mathcal{E}`, [r`U`, r`E`, r`\varepsilon`, r`I`]);
+sy("Внутреннее сопротивление источника", r`r`, [r`R`, r`\rho`, r`\eta`, r`\mu`]);
+sy("Мощность тока", r`P`, [r`N`, r`p`, r`W`, r`A`]);
+sy("Напряжённость электрического поля", r`E`, [r`e`, r`F`, r`U`, r`\varphi`]);
+sy("Потенциал электрического поля", r`\varphi`, [r`U`, r`E`, r`W_p`, r`\psi`]);
+sy("Электроёмкость", r`C`, [r`c`, r`q`, r`U`, r`L`]);
+sy("Электрическая постоянная", r`\varepsilon_0`, [r`\varepsilon`, r`\mu_0`, r`k`, r`G`]);
+sy("Диэлектрическая проницаемость среды", r`\varepsilon`, [r`\varepsilon_0`, r`\mu`, r`n`, r`\eta`]);
+sy("Коэффициент в законе Кулона", r`k`, [r`K`, r`G`, r`\varepsilon`, r`c`]);
+sy("Электрохимический эквивалент", r`k`, [r`K`, r`\rho`, r`c`, r`\mu`]);
+// Магнетизм, колебания
+sy("Магнитная индукция", r`B`, [r`b`, r`H`, r`F`, r`\Phi`]);
+sy("Магнитный поток", r`\Phi`, [r`\varphi`, r`B`, r`\Psi`, r`L`]);
+sy("Индуктивность", r`L`, [r`l`, r`C`, r`\lambda`, r`\Phi`]);
+sy("Сила Ампера", r`F_A`, [r`F_л`, r`F_{упр}`, r`F_{тр}`, r`A`]);
+sy("Сила Архимеда", r`F_A`, [r`F_{т}`, r`F_{упр}`, r`P`, r`A`]);
+sy("Сила Лоренца", r`F_л`, [r`F_A`, r`F_ц`, r`F_{т}`, r`L`]);
+sy("Амплитуда колебаний (смещения)", r`x_m`, [r`A`, r`x_0`, r`\omega`, r`a`]);
+sy("Коэффициент трансформации", r`k`, [r`K`, r`n`, r`\eta`, r`\Gamma`]);
+// Оптика
+sy("Абсолютный показатель преломления", r`n`, [r`N`, r`\eta`, r`\nu`, r`k`]);
+sy("Скорость света в вакууме", r`c`, [r`C`, r`v`, r`u`, r`\nu`]);
+sy("Угол падения", r`\alpha`, [r`\beta`, r`\gamma`, r`\varphi`, r`\theta`]);
+sy("Угол отражения", r`\beta`, [r`\alpha`, r`\gamma`, r`\varphi`, r`\omega`]);
+sy("Угол преломления", r`\gamma`, [r`\alpha`, r`\beta`, r`\varphi`, r`\delta`]);
+sy("Оптическая сила линзы", r`D`, [r`F`, r`d`, r`f`, r`C`]);
+sy("Фокусное расстояние линзы", r`F`, [r`f`, r`d`, r`D`, r`h`]);
+sy("Расстояние от линзы до предмета", r`d`, [r`f`, r`F`, r`D`, r`H`]);
+sy("Расстояние от линзы до изображения", r`f`, [r`d`, r`F`, r`\nu`, r`D`]);
+sy("Увеличение линзы", r`\Gamma`, [r`\gamma`, r`\beta`, r`k`, r`n`]);
+sy("Разность хода волн", r`\Delta d`, [r`d`, r`l`, r`\lambda`, r`\Delta t`]);
+sy("Период дифракционной решётки", r`d`, [r`D`, r`l`, r`a`, r`\lambda`]);
+sy("Порядок максимума (целое число)", r`k`, [r`n`, r`m`, r`N`, r`K`]);
+// Квантовая и ядерная
+sy("Постоянная Планка", r`h`, [r`H`, r`\hbar`, r`k`, r`G`]);
+sy("Работа выхода электрона", r`A_{вых}`, [r`A`, r`W`, r`E`, r`U_з`]);
+sy("Запирающее напряжение", r`U_з`, [r`U`, r`E_k`, r`A_{вых}`, r`\varphi`]);
+sy("Период полураспада", r`T`, [r`t`, r`\tau`, r`\lambda`, r`N`]);
+sy("Дефект масс", r`\Delta m`, [r`m`, r`M_я`, r`\delta`, r`m_0`]);
+sy("Масса ядра", r`M_я`, [r`m`, r`m_p`, r`m_n`, r`M`]);
+sy("Зарядовое число (число протонов)", r`Z`, [r`A`, r`N`, r`z`, r`n`]);
+sy("Массовое число", r`A`, [r`Z`, r`N`, r`M`, r`a`]);
+sy("Число нейтронов в ядре", r`N`, [r`Z`, r`A`, r`n`, r`\nu`]);
+sy("Масса протона", r`m_p`, [r`m_n`, r`m_e`, r`M_я`, r`m`]);
+sy("Масса нейтрона", r`m_n`, [r`m_p`, r`m_e`, r`M_я`, r`m`]);
+
+
+
+const LS = 'phys_trainer_v1';
+let S = { p: {}, sel: null };
+try { const x = JSON.parse(localStorage.getItem(LS) || 'null'); if (x) S = x; } catch (e) {}
+const save = () => { try { localStorage.setItem(LS, JSON.stringify(S)); } catch (e) {} };
+F.forEach((f, i) => { f.id = i; f.key = f.g + '|' + f.name; });
+const GROUPS = [...new Set(F.map(f => f.g))];
+if (!S.sel) S.sel = GROUPS.slice();
+const $ = id => document.getElementById(id);
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const P = f => S.p[f.key] || (S.p[f.key] = { s: 0, w: 0 });
+const mastered = f => P(f).s >= 2;
+const inSel = f => S.sel.includes(f.g);
+const selected = () => F.filter(inSel);
+
+/* ---------- ГЕНЕРАТОР ПОХОЖИХ ВЫДУМАННЫХ ФОРМУЛ ---------- */
+SYM.forEach((s, i) => { s.id = 1000 + i; s.key = 'S|' + s.name; s.g = 'Обозначения'; });
+const rnd = n => Math.floor(Math.random() * n);
+const norm = s => s.replace(/\s+/g, '');
+const VARCMD = new Set(['rho', 'omega', 'nu', 'lambda', 'Delta', 'varphi', 'alpha', 'beta', 'gamma', 'mu', 'eta', 'Phi', 'varepsilon', 'pi', 'Gamma', 'delta']);
+const ALT = {
+  'Правило смещения при альфа-распаде': [r`{}^{A}_{Z}X\to{}^{A-2}_{Z-4}Y+{}^{4}_{2}He`, r`{}^{A}_{Z}X\to{}^{A-4}_{Z-2}Y+{}^{2}_{4}He`],
+  'Правило смещения при бета-распаде': [r`{}^{A}_{Z}X\to{}^{A+1}_{Z}Y+{}^{\ 0}_{-1}e`, r`{}^{A}_{Z}X\to{}^{A}_{Z-1}Y+{}^{\ 0}_{-1}e`]
+};
+function groupEnd(s, i) { let d = 0; for (let j = i; j < s.length; j++) { if (s[j] === '{') d++; else if (s[j] === '}') { d--; if (d === 0) return j + 1; } } return -1; }
+function readSub(s, k) {
+  if (s[k] === '_') { if (s[k + 1] === '{') { const e = groupEnd(s, k + 1); return e < 0 ? k + 1 : e; } return k + 2; }
+  return k;
+}
+function tokenize(s) {
+  const out = []; let i = 0;
+  while (i < s.length) {
+    const c = s[i];
+    if (c === '\\') {
+      let j = i + 1; while (j < s.length && /[a-zA-Z]/.test(s[j])) j++;
+      if (j === i + 1) { out.push({ t: s.slice(i, i + 2), v: false }); i += 2; continue; }
+      const name = s.slice(i + 1, j);
+      if (VARCMD.has(name)) { const k = readSub(s, j); out.push({ t: s.slice(i, k), v: true }); i = k; continue; }
+      out.push({ t: s.slice(i, j), v: false }); i = j; continue;
+    }
+    if (/[A-Za-z]/.test(c)) { const k = readSub(s, i + 1); out.push({ t: s.slice(i, k), v: true }); i = k; continue; }
+    out.push({ t: c, v: false }); i++;
+  }
+  return out;
+}
+function join(T) {
+  let o = '';
+  T.forEach((x, i) => { o += x.t; const nx = T[i + 1]; if (nx && /\\[a-zA-Z]+$/.test(x.t) && /^[A-Za-z]/.test(nx.t)) o += ' '; });
+  return o;
+}
+function splitPart(p) { const i = p.indexOf('='); return i < 0 ? { lead: '', rhs: p } : { lead: p.slice(0, i).trim(), rhs: p.slice(i + 1).trim() }; }
+function cutTail(rhs) { const m = rhs.search(/\\quad\s*\(|\\ \(/); return m < 0 ? { core: rhs, tail: '' } : { core: rhs.slice(0, m).trim(), tail: ' ' + rhs.slice(m) }; }
+const balanced = s => (s.match(/\{/g) || []).length === (s.match(/\}/g) || []).length && !/\{\}/.test(s.replace(/\{\}\^/g, ''));
+const partsOf = f => f.tex.split(SEP);
+const KNOWN = new Set();
+F.forEach(f => partsOf(f).forEach(p => KNOWN.add(norm(cutTail(splitPart(p).rhs).core))));
+const POOL = {};
+function poolFor(g) {
+  const gr = g.split(' · ')[0];
+  if (POOL[gr]) return POOL[gr];
+  const s = new Set();
+  F.filter(f => f.g.startsWith(gr)).forEach(f => partsOf(f).forEach(p => tokenize(cutTail(splitPart(p).rhs).core).forEach(x => { if (x.v) s.add(x.t); })));
+  return (POOL[gr] = [...s]);
+}
+function flipChar(core, a, b) {
+  const idx = []; for (let i = 0; i < core.length; i++) if (core[i] === a) idx.push(i);
+  if (!idx.length) return null; const i = idx[rnd(idx.length)]; return core.slice(0, i) + b + core.slice(i + 1);
+}
+function invertFrac(core) {
+  const ps = []; let p = -1; while ((p = core.indexOf('\\dfrac{', p + 1)) >= 0) ps.push(p);
+  if (!ps.length) return null; p = ps[rnd(ps.length)];
+  const e1 = groupEnd(core, p + 6); if (e1 < 0 || core[e1] !== '{') return null; const e2 = groupEnd(core, e1); if (e2 < 0) return null;
+  return core.slice(0, p) + '\\dfrac{' + core.slice(e1 + 1, e2 - 1) + '}{' + core.slice(p + 7, e1 - 1) + '}' + core.slice(e2);
+}
+const ANGLES = ['\\alpha', '\\beta', '\\gamma', '\\varphi'];
+function degenerate(c) {
+  if (/\\dfrac\{([^{}]*)\}\{\1\}/.test(c)) return true;
+  const T = tokenize(c).filter(x => x.t !== ' ' && x.t !== '\\cdot');
+  for (let i = 1; i < T.length; i++) {
+    if (T[i].v && T[i - 1].v && T[i].t === T[i - 1].t) return true;
+    if (i >= 2 && T[i].v && T[i - 2].v && (T[i - 1].t === '-' || T[i - 1].t === '+') && T[i].t === T[i - 2].t) return true;
+  }
+  return false;
+}
+function mutateOnce(core, pool) {
+  const T = tokenize(core);
+  const isDelta = i => T[i].t.startsWith('\\Delta');
+  const vi = []; T.forEach((x, i) => { if (x.v && !isDelta(i)) vi.push(i); });
+  const ops = [];
+  const cleanPool = pool.filter(p => !p.startsWith('\\Delta'));
+  if (vi.length) {
+    const rv = () => {
+      const i = vi[rnd(vi.length)], prev = T[i - 1] && T[i - 1].t;
+      let c;
+      if (prev === '\\sin' || prev === '\\cos') c = ANGLES;
+      else { const own = vi.map(j => T[j].t).filter(x => x !== T[i].t); c = (own.length && Math.random() < 0.4 ? own : cleanPool); }
+      c = c.filter(p => p !== T[i].t); if (!c.length) return null;
+      const R = T.slice(); R[i] = { t: c[rnd(c.length)] }; return join(R);
+    };
+    ops.push(rv, rv, rv, rv);
+    ops.push(() => { if (Math.random() < 0.5) return null; const i = vi[rnd(vi.length)]; if (/\^/.test(T[i].t)) return null; const R = T.slice(); R[i] = { t: T[i].t + '^2' }; return join(R); });
+  }
+  if (core.includes('\\dfrac{')) { ops.push(() => invertFrac(core)); ops.push(() => invertFrac(core)); }
+  if (core.includes('^2')) ops.push(() => core.replace('^2', ['', '^3'][rnd(2)]));
+  if (core.includes('+')) ops.push(() => flipChar(core, '+', '-'));
+  if (core.includes('-') && !core.includes('^{-')) ops.push(() => flipChar(core, '-', '+'));
+  if (core.includes('\\cdot')) ops.push(() => core.replace('\\cdot', '+'));
+  const di = []; T.forEach((x, i) => { if (/^\d$/.test(x.t) && !x.v) { const p1 = T[i - 1] && T[i - 1].t, p2 = T[i - 2] && T[i - 2].t; if (p1 !== '^' && p1 !== '_' && !(p1 === '{' && (p2 === '^' || p2 === '_'))) di.push(i); } });
+  if (di.length) {
+    const dg = () => { const i = di[rnd(di.length)], R = T.slice(), fr = T[i - 1] && T[i - 1].t === '{' && T[i + 1] && T[i + 1].t === '}', d = (fr ? ['1', '2', '3', '4'] : ['2', '3', '4']).filter(x => x !== T[i].t); R[i] = { t: d[rnd(d.length)] }; return join(R); };
+    ops.push(dg, dg);
+  }
+  if (/^\\sqrt\{/.test(core) && groupEnd(core, 5) === core.length) ops.push(() => core.slice(6, -1));
+  else if (!core.includes('\\sqrt') && Math.random() < 0.25) ops.push(() => '\\sqrt{' + core + '}');
+  const nonvar = T.filter(x => !x.v).map(x => x.t).join('');
+  if (vi.length >= 2 && /^(\\cdot|\d)*$/.test(nonvar)) ops.push(() => { const k = 1 + rnd(vi.length - 1), L = T.slice(0, vi[k]), Rr = T.slice(vi[k]); while (L.length && L[L.length - 1].t === '\\cdot') L.pop(); while (Rr.length && Rr[0].t === '\\cdot') Rr.shift(); return '\\dfrac{' + join(L) + '}{' + join(Rr) + '}'; });
+  if (!ops.length) return null;
+  return ops[rnd(ops.length)]();
+}
+function genWrong(core, g, n) {
+  const pool = poolFor(g), out = [], seen = new Set([norm(core)]);
+  for (let t = 0; t < 120 && out.length < n; t++) {
+    const c = mutateOnce(core, pool); if (!c) continue; const k = norm(c);
+    if (seen.has(k) || KNOWN.has(k) || !balanced(c) || degenerate(c)) continue;
+    seen.add(k); out.push(c);
+  }
+  return out;
+}
+function otherParts(f, part, n) {
+  let c = F.filter(x => x.id !== f.id && x.g === f.g); if (c.length < n + 2) c = F.filter(x => x.id !== f.id && x.g.startsWith(f.g.split(' · ')[0]));
+  const out = [], seen = new Set([norm(part)]);
+  for (const x of shuffle(c.slice())) { const p = partsOf(x)[0]; if (!seen.has(norm(p))) { seen.add(norm(p)); out.push(p); } if (out.length >= n) break; }
+  return out;
+}
+/* Вопрос тренировки: показываем «буква =», варианты — правая часть (3 шт., 1 верный) */
+function makeQ(f) {
+  const ps = partsOf(f), part = ps[rnd(ps.length)], sp = splitPart(part);
+  let lead = sp.lead, opts = null;
+  if (ALT[f.name]) { lead = ''; opts = [part, ...ALT[f.name]]; }
+  else {
+    const { core, tail } = cutTail(sp.rhs);
+    if (sp.lead && !/const/.test(core)) {
+      const w = genWrong(core, f.g, 2);
+      if (w.length === 2) opts = [sp.rhs, ...w.map(x => x + tail)];
+    }
+    if (!opts) { lead = ''; opts = [part, ...otherParts(f, part, 2)]; }
+  }
+  const list = shuffle(opts.map((tex, i) => ({ tex, ok: i === 0 })));
+  return { lead, opts: list };
+}
+/* Вопрос на обозначение: правильная буква + 3 похожих неверных */
+function makeSymQ(s) {
+  const wrong = shuffle(s.d.filter(x => x !== s.tex)).slice(0, 3);
+  return { opts: shuffle([{ tex: s.tex, ok: true }, ...wrong.map(tex => ({ tex, ok: false }))]) };
+}
+
+function tx(el, t) {
+  if (window.katex) { try { window.katex.render(t, el, { throwOnError: false }); return; } catch (e) {} }
+  el.textContent = t;
+}
+function fhtml(f, cls) { return `<div class="formula ${cls || ''}" data-tex="${f.id}"></div>`; }
+function renderTex(root) { root.querySelectorAll('[data-tex]').forEach(el => tx(el, F[+el.dataset.tex].tex)); root.querySelectorAll('[data-rt]').forEach(el => tx(el, run.rt[+el.dataset.rt])); }
+
+let mode = 'learn', run = null, li = 0, hide = false;
+
+function header() {
+  const s = selected(), m = s.filter(mastered).length, pc = s.length ? Math.round(m * 100 / s.length) : 0;
+  $('pt').textContent = `Освоено: ${m} из ${s.length}`;
+  $('pp').textContent = pc + '%';
+  $('pb').style.width = pc + '%';
+}
+function chips() {
+  $('chips').innerHTML = GROUPS.map(g => `<span class="chip ${S.sel.includes(g) ? 'on' : ''}" data-g="${g}">${g}</span>`).join('') +
+    `<span class="chip" data-all="1">все / ничего</span>`;
+  $('chips').querySelectorAll('.chip').forEach(c => c.onclick = () => {
+    if (c.dataset.all) S.sel = S.sel.length === GROUPS.length ? [] : GROUPS.slice();
+    else { const g = c.dataset.g; S.sel = S.sel.includes(g) ? S.sel.filter(x => x !== g) : [...S.sel, g]; }
+    save(); run = null; li = 0; chips(); view();
+  });
+}
+const TABS = [['learn', '📖 Учить'], ['train', '🎯 Тренировка'], ['sym', '🔤 Обозначения'], ['recall', '🧠 Вспомнить'], ['exam', '📝 Экзамен'], ['list', '📋 Список']];
+function tabs() {
+  $('tabs').innerHTML = TABS.map(([k, n]) => `<button class="tab ${mode === k ? 'on' : ''}" data-m="${k}">${n}</button>`).join('');
+  $('tabs').querySelectorAll('.tab').forEach(b => b.onclick = () => { mode = b.dataset.m; run = null; tabs(); view(); });
+}
+function view() {
+  header();
+  if (mode === 'sym') return intro();
+  if (!selected().length) { $('app').innerHTML = '<div class="card center">Выбери хотя бы один класс/раздел выше.</div>'; return; }
+  if (mode === 'learn') return learn();
+  if (mode === 'list') return list();
+  return intro();
+}
+
+/* ---------- УЧИТЬ ---------- */
+function learn() {
+  const s = selected(); if (li >= s.length) li = 0; if (li < 0) li = s.length - 1;
+  const f = s[li], st = P(f);
+  $('app').innerHTML = `<div class="prog"><span>Карточка ${li + 1} из ${s.length}</span><span>${st.s >= 2 ? '🟢 освоено' : st.s ? '🟡 учится' : '⚪ новая'}</span></div>
+  <div class="card"><div class="grp">${f.g}</div><div class="name">${f.name}</div>${fhtml(f, hide ? 'hid' : '')}
+  <div class="small center">${hide ? 'Формула скрыта: вспомни её, затем нажми на размытое место' : 'Прочитай, потом нажми «Скрыть» и попробуй воспроизвести по памяти'}</div></div>
+  <div class="row"><button class="btn" id="pv">← Назад</button><button class="btn" id="hd">${hide ? '👁 Показать' : '🙈 Скрыть формулу'}</button><button class="btn pri" id="nx">Дальше →</button></div>
+  <p class="small center">Подсказка: стрелки ← → и пробел. Учишь нужный раздел — потом иди в «Тренировку».</p>`;
+  renderTex($('app'));
+  $('pv').onclick = () => { li--; view(); };
+  $('nx').onclick = () => { li++; view(); };
+  $('hd').onclick = () => { hide = !hide; view(); };
+  const fm = $('app').querySelector('.formula'); fm.onclick = () => { if (hide) { hide = false; view(); } };
+}
+
+/* ---------- СПИСОК ---------- */
+function list() {
+  const s = selected();
+  $('app').innerHTML = `<div class="card"><table>${s.map(f => {
+    const v = P(f).s; return `<tr><td><div class="grp" style="margin:0">${f.g}</div>${f.name}<br><span class="stat s${Math.min(v, 2)}">${v >= 2 ? 'освоено' : v ? 'учится' : 'новая'}${P(f).w ? ' · ошибок: ' + P(f).w : ''}</span></td><td class="f" data-tex="${f.id}"></td></tr>`;
+  }).join('')}</table></div>`;
+  renderTex($('app'));
+}
+
+/* ---------- ТРЕНИРОВКА / ВСПОМНИТЬ / ЭКЗАМЕН ---------- */
+function intro() {
+  const s = selected(), left = s.filter(f => !mastered(f)).length, sl = SYM.filter(f => !mastered(f)).length;
+  const txt = {
+    train: ['🎯 Тренировка до полного освоения', 'Показывается название и начало формулы, например «F =». Ты выбираешь правильное продолжение из трёх похожих вариантов: два из них выдуманные, но очень правдоподобные. Ошибся — формула вернётся в очередь. Заканчивается, только когда освоены все выбранные формулы.', left, 'формул'],
+    sym: ['🔤 Обозначения величин', 'Показывается название величины, например «сила тока». Выбери правильную букву среди похожих обозначений. Освоенное обозначение — две верных подряд. Выбор классов сверху здесь не влияет.', sl, 'обозначений из ' + SYM.length],
+    recall: ['🧠 Вспомнить по памяти', 'Показывается название. Напиши формулу на бумаге (так запоминается лучше всего), нажми «Показать», сравни и честно отметь «Знал» / «Не знал». Две честных «Знал» подряд — формула освоена.', left, 'формул'],
+    exam: ['📝 Экзамен', 'Все выбранные формулы по одному разу, без подсказок, в случайном порядке: выбери целиком верную формулу из четырёх. Каждая ошибка сбрасывает серию формулы — она вернётся в тренировку.', s.length, 'формул']
+  }[mode];
+  $('app').innerHTML = `<div class="card center"><div class="name">${txt[0]}</div><p>${txt[1]}</p><p class="small">В очереди: <b>${txt[2]}</b> ${txt[3]}</p>
+  ${txt[2] ? '<button class="btn pri" id="go" style="max-width:320px">Начать</button>' : '<div class="big">🏆</div><p><b>Всё выбранное уже освоено!</b> Сделай «Экзамен» для проверки или выбери другие разделы.</p>'}</div>`;
+  if (txt[2]) $('go').onclick = start;
+}
+function start() {
+  let items = mode === 'sym' ? SYM.slice() : selected(); if (mode !== 'exam') items = items.filter(f => !mastered(f));
+  run = { queue: shuffle(items.slice()), total: items.length, done: 0, ok: 0, bad: [], cur: null, locked: false, rt: [] };
+  nextQ();
+}
+function pickWrong(f, key, n) {
+  const same = F.filter(x => x.id !== f.id && x.g === f.g && x[key] !== f[key]);
+  const grade = f.g.split(' · ')[0];
+  const near = F.filter(x => x.id !== f.id && x.g !== f.g && x.g.startsWith(grade) && x[key] !== f[key]);
+  const rest = F.filter(x => x.id !== f.id && !x.g.startsWith(grade) && x[key] !== f[key]);
+  const seen = new Set([f[key]]), out = [];
+  for (const x of [...shuffle(same), ...shuffle(near), ...shuffle(rest)]) { if (!seen.has(x[key])) { seen.add(x[key]); out.push(x); } if (out.length >= n) break; }
+  return out;
+}
+function nextQ() {
+  if (!run.queue.length) return finish();
+  const f = run.queue.shift(); run.cur = f; run.locked = false; run.rt = [];
+  const head = `<div class="prog"><span>${mode === 'exam' ? 'Вопрос ' + (run.done + 1) + ' из ' + run.total : 'Осталось освоить: ' + new Set([f.id, ...run.queue.map(x => x.id)]).size}</span><span>серия: ${P(f).s}/2 ${'🔥'.repeat(P(f).s)}</span></div>`;
+  if (mode === 'recall') {
+    $('app').innerHTML = head + `<div class="card center"><div class="grp">${f.g}</div><div class="name" style="font-size:22px">${f.name}</div><p class="small">Напиши формулу по памяти, затем проверь себя</p><div id="rv"><button class="btn pri" id="show" style="max-width:320px">Показать формулу</button></div></div>`;
+    $('show').onclick = () => {
+      $('rv').innerHTML = `${fhtml(f)}<div class="row"><button class="btn no" id="nk">✗ Не знал</button><button class="btn ok" id="kn">✓ Знал</button></div>`;
+      renderTex($('rv')); $('kn').onclick = () => answer(true); $('nk').onclick = () => answer(false);
+    };
+    return;
+  }
+  let title, body, q;
+  if (mode === 'sym') { q = makeSymQ(f); title = 'Обозначения · выбери правильную букву'; body = `<div class="name" style="font-size:22px">Как обозначается: «${f.name}»?</div>`; }
+  else if (mode === 'train') { q = makeQ(f); title = `${f.g} · допиши формулу`; body = `<div class="name" style="font-size:20px">${f.name}</div><div class="formula" id="lead"></div>`; }
+  else { q = { opts: shuffle([f, ...pickWrong(f, 'tex', 3)]).map(o => ({ tex: o.tex, ok: o.id === f.id })) }; title = `${f.g} · выбери формулу`; body = `<div class="name" style="font-size:22px">${f.name}</div>`; }
+  run.q = q;
+  $('app').innerHTML = head + `<div class="card"><div class="grp">${title}</div>${body}<div class="opts ${q.opts.length === 3 ? 'o3' : ''}">${q.opts.map((o, i) => `<div class="opt" data-i="${i}"><span class="k">${i + 1}</span><span data-oi="${i}"></span></div>`).join('')}</div><div id="fb"></div></div>`;
+  if (mode === 'train') { const el = $('lead'); if (q.lead) tx(el, q.lead + '\\ =\\ \\;?'); else { el.textContent = 'Выбери верную запись формулы'; el.style.fontSize = '1em'; el.style.minHeight = '30px'; } }
+  $('app').querySelectorAll('[data-oi]').forEach(el => tx(el, run.q.opts[+el.dataset.oi].tex));
+  $('app').querySelectorAll('.opt').forEach(el => el.onclick = () => choose(el));
+}
+function choose(el) {
+  if (run.locked) return; run.locked = true;
+  const good = run.q.opts[+el.dataset.i].ok;
+  $('app').querySelectorAll('.opt').forEach((o, j) => { o.classList.add('dis'); if (run.q.opts[j].ok) o.classList.add('right'); });
+  if (!good) el.classList.add('wrong');
+  answer(good, true);
+}
+function answer(good, mc) {
+  const f = run.cur, p = P(f); run.done++;
+  if (good) { p.s++; run.ok++; } else { p.s = 0; p.w++; if (!run.bad.includes(f)) run.bad.push(f); }
+  save(); header();
+  if (mode !== 'exam' && p.s < 2) { const pos = Math.min(run.queue.length, (good ? 5 : 2) + Math.floor(Math.random() * 3)); run.queue.splice(pos, 0, f); }
+  let shown = '';
+  if (!good) { if (f.sym) { run.rt.push(f.tex); shown = `<div class="small" style="color:inherit">${f.name}</div><div class="formula" data-rt="${run.rt.length - 1}"></div>`; } else shown = `<div class="small" style="color:inherit">${f.name}</div>${fhtml(f)}`; }
+  const fb = `<div class="fb ${good ? 'ok' : 'bad'}"><b>${good ? (p.s >= 2 ? '✓ Верно! Освоено 🎉' : '✓ Верно!') : '✗ Неверно — запомни правильный ответ'}</b>${shown}</div>
+  <div class="row"><button class="btn pri" id="nq">Дальше (Enter)</button></div>`;
+  if (mc) { $('fb').innerHTML = fb; } else { $('rv').innerHTML = fb; }
+  renderTex($('app'));
+  $('nq').onclick = nextQ; $('nq').focus();
+  if (good && mc) setTimeout(() => { if (run && run.cur === f && $('nq')) nextQ(); }, 900);
+}
+function finish() {
+  const left = 0;
+  if (mode === 'exam') {
+    const pc = Math.round(run.ok * 100 / run.total);
+    $('app').innerHTML = `<div class="card center"><div class="big">${pc >= 90 ? '🏆' : pc >= 60 ? '👍' : '💪'}</div><div class="name">Экзамен: ${run.ok} из ${run.total} (${pc}%)</div>
+    ${run.bad.length ? `<p>Нужно повторить (${run.bad.length}):</p></div><div class="card"><table>${run.bad.map(f => `<tr><td>${f.name}</td><td class="f" data-tex="${f.id}"></td></tr>`).join('')}</table></div>` : '<p>Безошибочно! Ты знаешь все выбранные формулы.</p></div>'}
+    <div class="row"><button class="btn" id="again">Ещё раз</button><button class="btn pri" id="tr">В тренировку</button></div>`;
+    renderTex($('app'));
+    $('again').onclick = start; $('tr').onclick = () => { mode = 'train'; tabs(); view(); };
+  } else {
+    $('app').innerHTML = `<div class="card center"><div class="big">🏆</div><div class="name">Все ${run.total} ${mode === 'sym' ? 'обозначений' : 'формул'} освоены!</div><p>Ошибок за сессию: ${run.bad.length}${left ? '' : '. В выбранных разделах не осталось ничего неосвоенного.'}</p></div>
+    <div class="row"><button class="btn pri" id="ex">${mode === 'sym' ? 'К тренировке формул' : 'Сдать экзамен на всё'}</button></div>`;
+    $('ex').onclick = () => { mode = mode === 'sym' ? 'train' : 'exam'; tabs(); view(); };
+  }
+  header();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (mode === 'learn') {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); li++; view(); }
+    if (e.key === 'ArrowLeft') { li--; view(); }
+    return;
+  }
+  if (!run || !run.cur) return;
+  const nq = $('nq');
+  if (nq && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); nq.click(); return; }
+  if (/^[1-4]$/.test(e.key) && !run.locked) { const o = $('app').querySelectorAll('.opt')[+e.key - 1]; if (o) o.click(); }
+});
+$('reset').onclick = () => { if (confirm('Точно сбросить весь прогресс?')) { S.p = {}; save(); run = null; view(); } };
+
+function init() { chips(); tabs(); view(); }
+window.addEventListener('DOMContentLoaded', () => {
+  init();
+  // если KaTeX подгрузился позже — перерисовать формулы
+  window.addEventListener('load', () => { if (window.katex) view(); });
+});
+</script>
+</body>
+</html>
